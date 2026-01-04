@@ -45,22 +45,46 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'LG Controller',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-        cardTheme: CardThemeData(
-          elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        ),
-      ),
+      theme: _buildDarkTheme(),
       home: HomeScreen(
         sshController: sshController,
         settingsController: settingsController,
         lgController: lgController,
       ),
+    );
+  }
+
+  ThemeData _buildDarkTheme() {
+    final seed = Colors.tealAccent;
+    final base = ThemeData(
+      brightness: Brightness.dark,
+      useMaterial3: true,
+    );
+
+    final scheme = ColorScheme.fromSeed(
+      seedColor: seed,
+      brightness: Brightness.dark,
+      surface: const Color(0xFF121826),
+      background: const Color(0xFF0B111B),
+    );
+
+    return base.copyWith(
+      colorScheme: scheme,
+      scaffoldBackgroundColor: const Color(0xFF0B111B),
+      canvasColor: const Color(0xFF0B111B),
+      cardColor: const Color(0xFF141A26),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: Colors.grey.shade900,
+        contentTextStyle: const TextStyle(color: Colors.white),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+      dialogBackgroundColor: const Color(0xFF141A26),
     );
   }
 }
